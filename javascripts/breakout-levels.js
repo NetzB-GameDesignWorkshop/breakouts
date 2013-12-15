@@ -1,17 +1,18 @@
 ;Quintus.BreakoutLevels = function(Q) {
 
-	var b = 4; // red
-	var r = 3; // blue
-	var o = 2; // orange
-	var g = 1; // green
-	var X = 0; // null
+        var b = 4; // red
+        var r = 3; // blue
+        var o = 2; // orange
+        var g = 1; // green
+        var X = 0; // null
 
   Q.assets['level1'] = [
-    [X,X,g,o,g,X,X],
+    [X,X,X,o,X,X,X],
     [o,b,g,g,g,b,o],
     [X,b,b,b,b,b,X]
   ];
 
+/*
   Q.assets['level2'] = [
     [X,g,o,g,o,g,X],
     [X,b,b,b,b,b,X],
@@ -40,6 +41,6 @@
     [o,X,X,X,X,X,o],
     [g,r,b,o,g,r,b]
   ];
-
+*/
 
 };

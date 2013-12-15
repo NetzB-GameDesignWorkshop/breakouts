@@ -220,8 +220,9 @@
       this.p.x = Q.inputs['mouseX'];
 
       if(Q("Ball").length == 0) {
-				Q.state.dec("lives",1);
-				if(Q.state.get("lives") == 0) {
+
+				Q.state.dec("lives", 1);
+        if(Q.state.get("lives") < 1) {
 					Q.stageScene("gameOver");
 				} else {
           this.stage.insert(new Q.Ball());

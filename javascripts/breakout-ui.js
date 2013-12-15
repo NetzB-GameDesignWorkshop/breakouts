@@ -45,7 +45,7 @@
   Q.UI.Text.extend("Lives",{
     init: function() {
       this._super({
-        label: "lives: 3",
+        label: "lives: 2",
         align: "left",
         x: 70,
         y: Q.height - 10,

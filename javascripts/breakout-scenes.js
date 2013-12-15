@@ -11,7 +11,7 @@
 
     stage.insert(new Q.Title());
 
-		var verb = Q.touchDevice ? 'Tap': 'Click';
+                var verb = Q.touchDevice ? 'Tap': 'Click';
 
     stage.insert(new Q.UI.Text({
       label: verb + " to start",
@@ -33,10 +33,45 @@
     }));
   });
 
+
+  Q.scene("goBackToGameOver",function(stage) {
+    console.log("gameOver");
+    console.log("window.location.href: "+ window.location.href)
+    console.log("document.URL: "+ document.URL)
+
+    var array = ARIS.parseURLParams(window.location.href);
+    var playerId = array.playerId[0];
+    var gameId = array.gameId[0];
+
+    console.log("playerId: "+playerId);
+    console.log("gameId: "+gameId);
+
+    ARIS.closeMe();
+    //window.open("aris://closeMe()", "_self");
+  });
+
+  Q.scene("goBackToWinner",function(stage) {
+    console.log("winner");
+    console.log("window.location.href: "+ window.location.href)
+    console.log("document.URL: "+ document.URL)
+
+    var array = ARIS.parseURLParams(window.location.href);
+    var playerId = array.playerId[0];
+    var gameId = array.gameId[0];
+
+    console.log("playerId: "+playerId);
+    console.log("gameId: "+gameId);
+
+    ARIS.closeMe();
+    //window.open("aris://closeMe()", "_self");
+  });
+
+
   Q.scene("gameOver",function(stage) {
 
     var bg = stage.insert(new Q.Background({ type: Q.SPRITE_UI }));
-    bg.on("touch",function() {  Q.stageScene("title");  });
+    //bg.on("touch",function() {  Q.stageScene("title");  });
+    bg.on("touch",function() {  Q.stageScene("goBackToGameOver");  });
 
     stage.insert(new Q.Title());
 
@@ -54,7 +89,8 @@
   Q.scene("winner",function(stage) {
 
     var bg = stage.insert(new Q.Background({ type: Q.SPRITE_UI }));
-    bg.on("touch",function() {  Q.stageScene("title");  });
+    //bg.on("touch",function() {  Q.stageScene("title");  });
+    bg.on("touch",function() {  Q.stageScene("goBackToWinner");  });
 
     stage.insert(new Q.Title());
 
@@ -70,6 +106,9 @@
   });
 
   Q.scene("hud",function(stage) {
+
+    console.log("stage: "+stage);
+
     stage.insert(new Q.Score());
     stage.insert(new Q.Lives());
     stage.insert(new Q.Level());
@@ -93,7 +132,7 @@
 
   Q.scene("level1",function(stage) {
     // Set up the game state
-    Q.state.reset({ score: 0, lives: 3, level: 1 });
+    Q.state.reset({ score: 0, lives: 2, level: 1 });
     
     // Add the hud in 
     Q.stageScene("hud"); 
@@ -104,25 +143,11 @@
     
     // Set up a listener for when the stage is complete
     // to load the next level
-    stage.on("complete",function() { Q.stageScene("level2"); });
-  });
 
-  Q.scene("level2",function(stage) {
-    Q.state.set("level",2);
-    setupLevel("level2",stage);
-    stage.on("complete",function() { Q.stageScene("level3"); });
-  });
 
-  Q.scene("level3",function(stage) {
-    Q.state.set("level",3);
-    setupLevel("level3",stage);
-    stage.on("complete",function() { Q.stageScene("level4"); });
-  });
 
-  Q.scene("level4",function(stage) {
-    Q.state.set("level",4);
-    setupLevel("level4",stage);
     stage.on("complete",function() { Q.stageScene("winner"); });
+
   });
 
   // Level Skipping
@@ -146,4 +171,3 @@
     }
   });
 };
-
